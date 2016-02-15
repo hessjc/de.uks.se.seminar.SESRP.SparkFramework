@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head data-th-replace="fragments/head :: head"></head>
+<body>
+	<div class="container">
+		<div data-th-replace="fragments/header :: header"></div>
+		<div class="content">
+			<h3>Edit Topic</h3>
+			<form action="/topic/edit" method="post">
+				<input class="hidden" name="id" data-th-value="${topic.getId()}"></input>
+				<div class="form-group">
+					<label for="title">Topic Title</label> <input type="text" class="form-control" data-th-value="${topic.getTitle()}" name="title"></input>
+				</div>
+				<div class="form-group">
+					<label for="title">Topic Title</label>
+					<textarea class="form-control" data-th-text="${topic.getDescription()}" name="description"></textarea>
+				</div>
+				<div class="form-group">
+					<label>Select Lecturer:</label> <select class="form-control" name="lecturer" data-th-field="*{lecturer}">
+						<option data-th-each="lecturer : ${lecturers}" data-th-value="${lecturer.getId()}" data-th-text="${lecturer.getName()}"></option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label>Select Semester:</label> <select class="form-control" name="semester" data-th-field="*{semester}">
+						<option data-th-each="semester : ${semesters}" data-th-value="${semester.getId()}" data-th-text="${semester.getName()}"></option>
+					</select>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-success" data-th-text="Save"></button>
+				</div>
+			</form>
+		</div>
+		<footer data-th-replace="fragments/footer :: footer"></footer>
+	</div>
+	<!-- /container -->
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="https://maxcdn.bootstrapcdn.com/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>

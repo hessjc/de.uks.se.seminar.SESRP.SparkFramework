@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head data-th-replace="fragments/head :: head"></head>
+<body>
+	<div class="container">
+		<div data-th-replace="fragments/header :: header"></div>
+		<div class="content">
+			<h3>Registered Users</h3>
+			<table class="table table-hover table-responsive">
+				<tr>
+					<th>#</th>
+					<th>Name</th>
+					<th>Email</th>
+				</tr>
+				<tr data-th-each="user : ${users}">
+					<table class="table table-hover table-responsive">
+						<tr>
+							<td><img data-th-src="'http://www.gravatar.com/avatar/' + ${user.getGravatar()}" class="img-rounded"></img></td>
+							<td data-th-text="${user.getName()}"></td>
+							<td data-th-text="${user.getEmail()}"></td>
+						</tr>
+						<tr data-th-each="topic : ${user.getChoices()}" class="warning">
+							<td>Choice:</td>
+							<td data-th-text="${topic.getTitle()}" colspan="2"></td>
+						</tr>
+						<tr data-th-if="${user.getTopic() != null}" class="success">
+							<td>Assigned Topic:</td>
+							<td data-th-text="${user.getTopic().getTitle()}" colspan="2"></td>
+						</tr>
+						<tr><td colspan="5">&nbsp;</td></tr>
+					</table>
+				</tr>
+			</table>
+		</div>
+		<footer data-th-replace="fragments/footer :: footer"></footer>
+	</div>
+	<!-- /container -->
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="https://maxcdn.bootstrapcdn.com/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>

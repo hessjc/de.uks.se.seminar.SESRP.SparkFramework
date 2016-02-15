@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head data-th-replace="fragments/head :: head"></head>
+<body>
+	<div class="container">
+		<div data-th-replace="fragments/header :: header"></div>
+		<div class="content">
+			<h3 data-th-text="'Registration for Software Engineering Seminar ' + ${semester.getName()}"></h3>
+			<form action="/registration" method="post">
+				<div class="form-group">
+					<label for="name">User Fullname (Firstname + Lastname)</label> <input type="text" class="form-control" placeholder="Fullname" name="name"></input>
+				</div>
+				<div class="form-group">
+					<label for="email">Email</label> <input type="email" class="form-control" name="email"></input>
+				</div>
+				<div class="form-group">
+					<table class="table table-responsive">
+						<tr>
+							<th>Topic</th>
+							<th>YES</th>
+							<th>NO</th>
+						</tr>
+						<tr data-th-each="topic : ${topics}">
+							<td data-th-utext="${topic.getTitle()} + '&lt;br /&gt;' + ${topic.getDescription()}"></td>
+							<td><label class="radio-inline"><input type="radio" data-th-name="'topic_' + ${topic.getId()}" value="1"></input></label></td>
+							<td><label class="radio-inline"><input type="radio" data-th-name="'topic_' + ${topic.getId()}" value="0"></input></label></td>
+						</tr>
+					</table>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-default">Submit</button>
+				</div>
+			</form>
+		</div>
+		<footer data-th-replace="fragments/footer :: footer"></footer>
+	</div>
+	<!-- /container -->
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="https://maxcdn.bootstrapcdn.com/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>

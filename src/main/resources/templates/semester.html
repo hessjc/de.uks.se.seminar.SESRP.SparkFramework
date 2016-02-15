@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head data-th-replace="fragments/head :: head"></head>
+<body>
+	<div class="container">
+		<div data-th-replace="fragments/header :: header"></div>
+		<div class="content">
+			<h3>Available Semesters</h3>
+			<table class="table table-hover table-responsive">
+				<tr>
+					<th>Name</th>
+					<th>Expiry Date</th>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+				<tr data-th-each="semester : ${semesters}">
+					<td data-th-text="${semester.getName()}"></td>
+					<td data-th-text="${semester.getExpiryDate()}"></td>
+					<td>
+						<form action="/semester/edit" data-th-object="${semester}" method="get">
+							<input class="hidden" data-th-value="${semester.getId()}" name="id"></input> <input class="btn btn-warning" type="submit" data-th-value="Edit"></input>
+						</form>
+					</td>
+					<td>
+						<form action="/semester/delete" data-th-object="${semester}" method="post">
+							<input class="hidden" data-th-value="${semester.getId()}" name="id"></input> <input class="btn btn-danger" type="submit" data-th-value="Delete"></input>
+						</form>
+					</td>
+					<td>
+						<form action="/semester/assign/topic" method="post">
+							<input class="hidden" data-th-value="${semester.getId()}" name="id"></input> <input class="btn btn-danger" type="submit" data-th-value="'Assign Topics'"></input>
+						</form>
+					</td>
+				</tr>
+			</table>
+			<h3>Create Semester</h3>
+			<form action="/semester/create" method="post">
+				<div class="form-group">
+					<label for="name">Semester Name</label> <input type="text" class="form-control" placeholder="Name" name="name"></input>
+				</div>
+				<div class="form-group">
+					<label for="date">Expiry Date</label>
+					<div id="expiryDate"></div>
+					<input class="hidden" id="date" name="date"></input>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-default">Create</button>
+				</div>
+			</form>
+		</div>
+		<footer data-th-replace="fragments/footer :: footer"></footer>
+	</div>
+	<!-- /container -->
+	<script>
+	$('#expiryDate').datepicker({
+	    language : "de",
+	    keyboardNavigation : false,
+	    calendarWeeks : true,
+	    todayHighlight : true
+	}).on('changeDate', function(e) {
+	    $('#date').val(e.format('dd/mm/yyyy'));
+	});
+    </script>
+</body>
+</html>

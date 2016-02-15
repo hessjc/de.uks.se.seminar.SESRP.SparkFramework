@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+
+		<!--  >property name="connection.url">jdbc:mysql://localhost:3306/seseminarregistration</property>
+		<property name="connection.username">root</property>
+		<property name="connection.password">root</property>
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="dialect">org.hibernate.dialect.MySQLDialect</property -->
+		
+		<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.username">ksltveafuubymm</property>
+        <property name="hibernate.connection.password">nvneFXZJdt88RozvLxiZ-SGXkO</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://ec2-54-225-195-249.compute-1.amazonaws.com:5432/dd46f4hjt2eg3h</property>
+
+		<property name="show_sql">true</property>
+		<property name="format_sql">true</property>
+		<property name="hbm2ddl.auto">create</property>
+
+		<!-- JDBC connection pool (use the built-in) -->
+		<property name="connection.pool_size">1</property>
+		<property name="current_session_context_class">thread</property>
+
+		<mapping class="de.uks.se.seminar.persistence.Semester" />
+		<mapping class="de.uks.se.seminar.persistence.Lecturer" />
+		<mapping class="de.uks.se.seminar.persistence.User" />
+		<mapping class="de.uks.se.seminar.persistence.Topic" />
+
+	</session-factory>
+</hibernate-configuration>

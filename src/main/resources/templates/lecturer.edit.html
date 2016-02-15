@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head data-th-replace="fragments/head :: head"></head>
+<body>
+	<div class="container">
+		<div data-th-replace="fragments/header :: header"></div>
+		<div class="content">
+			<h3>Edit Lecturer</h3>
+			<form action="/lecturer/edit" method="post">
+				<input class="hidden" name="id" data-th-value="${lecturer.getId()}"></input>
+				<div class="form-group">
+					<label for="name">Lecturer Name</label> <input type="text" class="form-control" data-th-value="${lecturer.getName()}" name="name"></input>
+				</div>
+				<div class="form-group">
+					<label for="email">Lecturer Email</label> <input type="text" class="form-control" data-th-value="${lecturer.getEmail()}" name="email"></input>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-success" data-th-text="Save"></button>
+				</div>
+			</form>
+		</div>
+		<footer data-th-replace="fragments/footer :: footer"></footer>
+	</div>
+	<!-- /container -->
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="https://maxcdn.bootstrapcdn.com/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>

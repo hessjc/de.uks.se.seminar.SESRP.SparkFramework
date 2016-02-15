@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head data-th-replace="fragments/head :: head"></head>
+<body>
+	<div class="container">
+		<div data-th-replace="fragments/header :: header"></div>
+		<div class="content">
+			<h3>Available Lecturers</h3>
+			<table class="table table-hover table-responsive">
+				<tr>
+					<th></th>
+					<th>Name</th>
+					<th>Email</th>
+					<th></th>
+					<th></th>
+				</tr>
+				<tr data-th-each="lecturer : ${lecturers}">
+					<td><img data-th-src="'http://www.gravatar.com/avatar/' + ${lecturer.getGravatar()}" class="img-rounded"></img></td>
+					<td data-th-text="${lecturer.getName()}"></td>
+					<td data-th-text="${lecturer.getEmail()}"></td>
+					<td>
+						<form action="/lecturer/edit" data-th-object="${lecturer}" method="get">
+							<input class="hidden" data-th-value="${lecturer.getId()}" name="id"></input> <input class="btn btn-warning" type="submit" data-th-value="Edit"></input>
+						</form>
+					</td>
+					<td>
+						<form action="/lecturer/delete" data-th-object="${lecturer}" method="post">
+							<input class="hidden" data-th-value="${lecturer.getId()}" name="id"></input> <input class="btn btn-danger" type="submit" data-th-value="Delete"></input>
+						</form>
+					</td>
+				</tr>
+			</table>
+			<h3>Create Lecturer</h3>
+			<form action="/lecturer/create" method="post">
+				<div class="form-group">
+					<label for="name">Lecturer Name</label> <input type="text" class="form-control" placeholder="Name" name="name"></input>
+				</div>
+				<div class="form-group">
+					<label for="email">Lecturer Email</label> <input type="email" class="form-control" placeholder="Email" name="email"></input>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-default">Submit</button>
+				</div>
+			</form>
+		</div>
+		<footer data-th-replace="fragments/footer :: footer"></footer>
+	</div>
+	<!-- /container -->
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="https://maxcdn.bootstrapcdn.com/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>

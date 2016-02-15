@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head data-th-replace="fragments/head :: head"></head>
+<body>
+	<div class="container">
+		<div data-th-replace="fragments/header :: header"></div>
+		<div class="content">
+			<h3>Edit Semester</h3>
+			<form action="/semester/edit" method="post">
+				<input class="hidden" name="id" data-th-value="${semester.getId()}"></input>
+				<div class="form-group">
+					<label for="name">Semester Name</label> <input type="text" class="form-control" data-th-value="${semester.getName()}" name="name"></input>
+				</div>
+				<div class="form-group">
+					<label for="date">Expiry Date</label>
+					<div id="expiryDate"></div>
+					<input class="hidden" id="date" name="date" data-th-value="${semester.getExpiryDate()}"></input>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-success" data-th-text="Save"></button>
+				</div>
+			</form>
+		</div>
+		<footer data-th-replace="fragments/footer :: footer"></footer>
+	</div>
+	<!-- /container -->
+	<script>
+	$('#expiryDate').datepicker({
+	    language : "de",
+	    keyboardNavigation : false,
+	    calendarWeeks : true,
+	    todayHighlight : true
+	}).on('changeDate', function(e) {
+	    $('#date').val(e.format('dd/mm/yyyy'));
+	});
+
+	// init date
+	var expiryDate = $('#date').val();
+	var date = $.format.date(expiryDate, "dd/MM/yyyy");
+	$('#expiryDate').datepicker('setDate', date);
+    </script>
+</body>
+</html>

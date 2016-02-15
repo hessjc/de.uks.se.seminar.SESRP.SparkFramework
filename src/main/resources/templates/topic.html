@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head data-th-replace="fragments/head :: head"></head>
+<body>
+	<div class="container">
+		<div data-th-replace="fragments/header :: header"></div>
+		<div class="content">
+			<h3>Available Topics</h3>
+			<table class="table table-hover table-responsive">
+				<tr>
+					<th>Title</th>
+					<th>Description</th>
+				</tr>
+				<tr data-th-each="topic : ${topics}">
+					<td data-th-text="${topic.getTitle()}"></td>
+					<td data-th-text="${topic.getDescription()}"></td>
+					<td data-th-text="${topic.getSemester().getName()}"></td>
+					<td>
+						<form action="/topic/edit" data-th-object="${topic}" method="get">
+							<input class="hidden" data-th-value="${topic.getId()}" name="id"></input> <input class="btn btn-warning" type="submit" data-th-value="Edit"></input>
+						</form>
+					</td>
+				</tr>
+			</table>
+			<h3>Create Topic</h3>
+			<form action="/topic/create" method="post">
+				<div class="form-group">
+					<label for="title">Topic Title</label> <input type="text" class="form-control" placeholder="Title" name="title"></input>
+				</div>
+				<div class="form-group">
+					<label for="description">Description</label>
+					<textarea class="form-control" rows="5" name="description"></textarea>
+				</div>
+				<div class="form-group">
+					<label>Select Semester:</label> <select class="form-control" name="semester">
+						<option data-th-each="semester : ${semesters}" data-th-value="${semester.getId()}" data-th-text="${semester.getName()}"></option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label>Select Lecturer:</label> <select class="form-control" name="lecturer">
+						<option data-th-each="lecturer : ${lecturers}" data-th-value="${lecturer.getId()}" data-th-text="${lecturer.getName()}"></option>
+					</select>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-default">Submit</button>
+				</div>
+			</form>
+		</div>
+		<footer data-th-replace="fragments/footer :: footer"></footer>
+	</div>
+	<!-- /container -->
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="https://maxcdn.bootstrapcdn.com/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>
